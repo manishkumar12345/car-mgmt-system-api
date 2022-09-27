@@ -1,0 +1,129 @@
+#%RAML 1.0
+title: Car-mgmt-system-api-manish
+protocols: [HTTP, HTTPS]
+types:
+  car: !include carDataTypes/CardataType.raml
+  updateCar: !include carDataTypes/updateCarDataType.raml
+securitySchemes:
+  customSecurity: !include common/securityScheme.raml
+securedBy:
+  - customSecurity
+    
+/car:
+  post:
+    description: Add new Car details.
+    body:
+      application/json:
+        type: car
+        examples: !include CarExamples/CarExample.raml
+    responses:
+      201:
+        body:
+          application/json:
+           example: !include CarResponses/201.json
+      400:
+        body:
+          application/json:
+            example: !include CarResponses/400.json
+      401:
+        body:
+          application/json:
+            example: !include CarResponses/401.json
+      404:
+        body:
+          application/json:
+            example: !include CarResponses/404.json
+      500:
+        body:
+          application/json:
+            example: !include CarResponses/500.json
+
+  /{CarId}:
+    put:
+      description: Update the Car details
+      body:
+        application/json:
+          type: updateCar
+          examples: !include CarExamples/CarExample.raml
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include CarResponses/200.json
+        201:
+          body:
+            application/json:
+              example: !include CarResponses/201.json
+        400:
+          body:
+            application/json:
+              example: !include CarResponses/400.json
+        401:
+          body:
+            application/json:
+              example: !include CarResponses/401.json
+        404:
+          body:
+            application/json:
+              example: !include CarResponses/404.json
+        500:
+          body:
+            application/json:
+              example: !include CarResponses/500.json
+  
+    get:
+      description: Get a Car details by specific Id
+      responses:
+       200:
+         body:
+          application/json:
+            type: car
+            examples: !include CarExamples/CarExample.raml
+       400:
+        body:
+          application/json:
+            example: !include CarResponses/400.json
+       404:
+        body:
+          application/json:
+            example: !include CarResponses/404.json
+       405:
+          body:
+            application/json:
+              example: !include CarResponses/405.json
+       500:
+         body:
+           application/json:
+             example: !include CarResponses/500.json
+    
+  /all:
+    get:
+      queryParameters:
+        limit:
+          type: integer
+          required: true
+      description: Get all Car details
+      responses:
+        200:
+          body:
+            application/json:
+              type: car[]
+              examples: !include CarExamples/CarsExample.raml
+        400:
+          body:
+            application/json:
+              example: !include CarResponses/400.json
+        404:
+          body:
+            application/json:
+              example: !include CarResponses/404.json
+        405:
+          body:
+            application/json:
+              example: !include CarResponses/405.json
+        500:
+          body:
+            application/json:
+              example: !include CarResponses/500.json
+                
+  

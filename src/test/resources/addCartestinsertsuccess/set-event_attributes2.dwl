@@ -1,0 +1,30 @@
+{
+  "headers": {
+    "client_id": "6f4ea6597daa4d108666775435880cd8",
+    "client_secret": "2b7B1df7597c4Db7AD43F2a3A463663A",
+    "content-type": "application/json",
+    "user-agent": "PostmanRuntime/7.29.2",
+    "accept": "*/*",
+    "postman-token": "0d56b3c6-78d4-4f1d-be85-ef3f7590d086",
+    "host": "localhost:8081",
+    "accept-encoding": "gzip, deflate, br",
+    "connection": "keep-alive",
+    "content-length": "176"
+  },
+  "clientCertificate": null,
+  "method": "POST",
+  "scheme": "http",
+  "queryParams": {},
+  "requestUri": "/api/car",
+  "queryString": "",
+  "version": "HTTP/1.1",
+  "maskedRequestPath": "/car",
+  "listenerPath": "/api/*",
+  "relativePath": "/api/car",
+  "localAddress": "/127.0.0.1:8081",
+  "uriParams": {},
+  "rawRequestUri": "/api/car",
+  "rawRequestPath": "/api/car",
+  "remoteAddress": "/127.0.0.1:65282",
+  "requestPath": "/api/car"
+}

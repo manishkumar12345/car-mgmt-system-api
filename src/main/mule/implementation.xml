@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:validation="http://www.mulesoft.org/schema/mule/validation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mule/validation/current/mule-validation.xsd">
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="8f79cab7-a801-450f-849a-bdfe573c9aa2" >
+		<db:generic-connection url="${db.URL}" driverClassName="org.postgresql.Driver" user="${secure::db.user}" password="${secure::db.password}" />
+	</db:config>
+	<validation:config name="Validation_Config" doc:name="Validation Config" doc:id="ddb402e5-df4e-45dc-839e-81efc7bc1cc3" />
+	<sub-flow name="addCar" doc:id="5cbc10ce-bbdf-4ae6-9526-f5cb0cd91c4f" >
+		<validation:is-not-null doc:name="Is not null" doc:id="f51821f7-998b-42cb-bd79-6237dd5fb59a" config-ref="Validation_Config" value="#[payload.CarNumber]"/>
+		<db:select doc:name="Select" doc:id="b58b3c19-26ad-4833-b952-1c8fd379f6e7" config-ref="Database_Config" target="selectData">
+			<db:sql ><![CDATA[select car_id,car_number from car_info where car_number = :carNumber;]]></db:sql>
+			<db:parameter-types />
+			<db:input-parameters ><![CDATA[#[{
+	carNumber : payload.CarNumber
+}]]]></db:input-parameters>
+		</db:select>
+		<choice doc:name="Choice" doc:id="762c7e8c-916a-46c6-9431-bf8673ed425a" >
+			<when expression="#[sizeOf(vars.selectData)&gt;0]">
+				<ee:transform doc:name="Transform Message" doc:id="e4951c9f-b702-442b-ad91-aa4e13e42064">
+					<ee:message>
+						<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+	'Message' : "The Car number " ++ payload.CarNumber as String default '' ++  " already exists."
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+			</when>
+			<otherwise >
+				<db:insert doc:name="Insert Car Data" doc:id="e668e2e6-8c76-416a-b4a4-8a2982775c80" config-ref="Database_Config" target="insertCarData">
+					<db:sql ><![CDATA[insert into car_info(car_model,car_company,car_number,car_type,car_seating_capacity,car_description,fuel_type,car_color,active,create_date) VALUES(:carModel,:carCompany,:carNumber,:carType,:carSeatingCapacity,:carDescription,:fuelType,:carColor,:carStatus,:created_at)]]></db:sql>
+					<db:input-parameters ><![CDATA[#[{
+	carModel : payload.CarModel,
+	carCompany : payload.CarCompany,
+	carNumber : payload.CarNumber,
+	carType : payload.CarType,
+	carSeatingCapacity : payload.CarSeatingCapacity,
+	carDescription : payload.CarDescription,
+	fuelType : payload.FuelType,
+	carColor : payload.CarColor,
+	carStatus : payload.Active,
+	created_at : now() as Date {format: "yyyy-mm-dd"}
+}]]]></db:input-parameters>
+				</db:insert>
+				<ee:transform doc:name="Transform Message" doc:id="81962c07-1f38-429e-a16a-1a67a0adad4a" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+var last_insert_id = vars.insertCarData.generatedKeys
+---
+{
+	'statusCode' : '201',
+	'Message' : "The Car ID " ++ last_insert_id.car_id as String default '' ++  " has been successfully created."
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+			</otherwise>
+		</choice>
+	</sub-flow>
+	<sub-flow name="updateCar" doc:id="ff73a137-bfbc-45b3-9173-9c4443e26466" >
+		<validation:is-not-null doc:name="car Id should not null" doc:id="34859232-fc7e-4515-aa6d-d64c42685a4d" config-ref="Validation_Config" value="#[message.attributes.uriParams.CarId]"/>
+		<validation:is-number doc:name="car Id should be number" doc:id="006d42e2-5dbc-48aa-8598-742cba186c79" config-ref="Validation_Config" value="#[message.attributes.uriParams.CarId]" numberType="INTEGER"/>
+		<set-variable value="#[message.attributes.uriParms.CarId]" doc:name="Set Variable" doc:id="0c5da862-9649-4e89-afc8-7a16e1f337da" variableName="CarId"/>
+		<db:query-single doc:name="Query single" doc:id="c49a20a8-2ab3-47ca-8fc1-c9ad3a5331df" config-ref="Database_Config" target="existCarData">
+			<db:sql ><![CDATA[select * from car_info where car_id = :carId]]></db:sql>
+			<db:input-parameters ><![CDATA[#[{
+	carId : vars.CarId
+}]]]></db:input-parameters>
+		</db:query-single>
+		<ee:transform doc:name="Transform Message" doc:id="771a267b-7572-47d3-aeeb-a2a30e04c54a" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	carId : vars.CarId default vars.existCarData.car_id,
+	carModel : payload.CarModel default vars.existCarData.car_model,
+	carCompany : payload.CarCompany default vars.existCarData.car_company,
+	carNumber : payload.CarNumber default vars.existCarData.car_number,
+	carType : payload.CarType default vars.existCarData.car_type,
+	carSeatingCapacity : payload.CarSeatingCapacity default vars.existCarData.car_seating_capacity,
+	carDescription : payload.CarDescription default vars.existCarData.car_description,
+	fuelType : payload.FuelType default vars.existCarData.fuel_type,
+	carColor : payload.CarColor default vars.existCarData.car_color,
+	carStatus : payload.Active default vars.existCarData.active
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<choice doc:name="Choice" doc:id="d74233c9-ee49-4dde-b3e8-f8778acb413e" >
+			<when expression="#[sizeOf(vars.existCarData)&gt;0]">
+				<db:update doc:name="Update" doc:id="0b6a02b3-371e-4cfc-840b-1d848099e985" config-ref="Database_Config" target="updateCarData">
+					<db:sql ><![CDATA[UPDATE car_info SET car_model = :carModel, car_company = :carCompany, car_number = :carNumber,car_type = :carType,car_seating_capacity = :carSeatingCapacity,car_description =:carDescription,fuel_type =:fuelType,car_color =:carColor,active =:carStatus,last_update =:lastUpdate
+WHERE car_id = :carId;]]></db:sql>
+					<db:input-parameters ><![CDATA[#[{
+	carId : payload.carId,
+	carModel : payload.carModel,
+	carCompany : payload.carCompany,
+	carNumber : payload.carNumber,
+	carType : payload.carType,
+	carSeatingCapacity : payload.carSeatingCapacity,
+	carDescription : payload.carDescription,
+	fuelType : payload.fuelType,
+	carColor : payload.carColor,
+	carStatus : payload.carStatus,
+	lastUpdate : now() as Date {format: "yyyy-mm-dd"}
+}]]]></db:input-parameters>
+				</db:update>
+				<ee:transform doc:name="Transform Message" doc:id="93debeac-6d9c-4b8f-b866-567df915b8f6" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	'statusCode' : '200',
+	'Message' : "The Car ID " ++ payload.carId as String ++ " has been successfully updated."
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+			</when>
+			<otherwise >
+				<ee:transform doc:name="Transform Message" doc:id="68912a6d-1a13-4186-818f-8d10c05c2cd1" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	'message' : 'Car Id not found'
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+			</otherwise>
+		</choice>
+	</sub-flow>
+	<sub-flow name="getAllCarsData" doc:id="7aa89567-959d-4a05-8297-1b65f68b457e" >
+		<set-variable value="#[message.attributes.queryParams.limit default 10]" doc:name="limit" doc:id="48cddd8f-a347-4691-86b5-2f5d8e9888a5" variableName="recordLimit"/>
+		<db:select doc:name="Select-all-car-data" doc:id="3e1b1c83-13f7-4436-8339-b18326e1b590" config-ref="Database_Config" target="carData">
+			<db:sql ><![CDATA[select * from car_info LIMIT :limit]]></db:sql>
+			<db:input-parameters ><![CDATA[#[{
+	limit : vars.recordLimit
+}]]]></db:input-parameters>
+		</db:select>
+		<choice doc:name="Choice" doc:id="21b8403c-e515-49cb-896a-56ea7d8a6295" >
+			<when expression="#[sizeOf(vars.carData) &gt; 0]">
+				<ee:transform doc:name="Transform Message" doc:id="6f6d19cb-a18c-4762-b11e-c0fa926b7d8c" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+ {
+ 	'message' : 'Car info data get successfully.',
+ 	'payload' : vars.carData
+ }
+ 	
+
+]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+			</when>
+			<otherwise >
+				<ee:transform doc:name="Transform Message" doc:id="895a541d-bf2a-4236-9436-f76f8b62e92e" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	'Message' : 'No record found'
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+			</otherwise>
+		</choice>
+	</sub-flow>
+	<sub-flow name="getCarDataBySpecificId" doc:id="0e6b5242-decf-4884-8ca7-80af985acf17" >
+		<validation:is-number doc:name="car-id-should-be-number" doc:id="3ccaa1fb-a8b7-419e-8a47-031e0bd66c06" config-ref="Validation_Config" value="#[attributes.uriParams.'CarId']" numberType="INTEGER"/>
+		<db:query-single doc:name="getCarById" doc:id="dca63b91-7f65-426c-9d33-2503a6e288aa" config-ref="Database_Config" target="getCarById">
+			<db:sql ><![CDATA[select * from car_info where car_id = :carId]]></db:sql>
+			<db:input-parameters ><![CDATA[#[{
+	carId : attributes.uriParams.'CarId'
+}]]]></db:input-parameters>
+		</db:query-single>
+		<choice doc:name="Choice" doc:id="b96c118b-fee3-45e4-abca-f73f893fe7a4" >
+			<when expression="#[sizeOf(vars.getCarById) &gt; 0]">
+				<ee:transform doc:name="Transform Message" doc:id="6d03639c-cd75-48c8-8467-918b9ef591f5" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	'statusCode' : '200',
+	'message' : 'Car specific data get successfully.',
+	'data' : vars.getCarById
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+			</when>
+			<otherwise >
+				<ee:transform doc:name="Transform Message" doc:id="876627da-5841-4ee3-95ef-e0a73cd331a6" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	'message' : 'No record found.'
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+			</otherwise>
+		</choice>
+	</sub-flow>
+</mule>

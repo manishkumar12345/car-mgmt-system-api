@@ -1,0 +1,16 @@
+%dw 2.0
+
+type auto_41b1ae91_5695_4eec_acf7_bd5f0bf348b8_Input_Payload = {
+  CarModel?: String, 
+  CarId?: Number, 
+  CarNumber?: String, 
+  Active: Boolean, 
+  CarDescription?: String, 
+  CarCompany: String, 
+  CarType: String, 
+  CarColor?: String, 
+  FuleType?: String, 
+  CarSeatingCapacity: Number, 
+  _?: Any
+}
+

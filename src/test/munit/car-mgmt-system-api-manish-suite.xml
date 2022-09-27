@@ -1,0 +1,1093 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="car-mgmt-system-api-manish-suite.xml" />
+	
+	
+	<munit:test name="getCarDataBySpecificId-test-success" doc:id="4da86b03-820d-4c0c-9d4c-eea21c398207" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock getCarById" doc:id="628878e5-f6c3-4608-95a5-73917d939e2c" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="d7d3fa1b-9579-48cc-a673-85690c691f63" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[readUrl('classpath://getCarDataBySpecificIdtestsuccess\mock_payload.dwl')]" encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://getCarDataBySpecificIdtestsuccess\mock_attributes.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getCarDataBySpecificIdtestsuccess\mock_variable_.dwl')]" />
+						<munit-tools:variable key="getCarById" value="#[output application/java --- readUrl('classpath://getCarDataBySpecificIdtestsuccess\mock_variable_1.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="470c5575-0ede-4667-ac3c-f73cbff29c4b" >
+				<munit:payload value="#[readUrl('classpath://getCarDataBySpecificIdtestsuccess\set-event_payload.dwl')]" encoding="UTF-8" />
+				<munit:attributes value="#[readUrl('classpath://getCarDataBySpecificIdtestsuccess\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://getCarDataBySpecificIdtestsuccess\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to getCarDataBySpecificId" doc:id="100c68e7-4fef-4823-967d-c85102cf3261" name="get:\car\(CarId):car-mgmt-system-api-manish-config"/>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-that doc:name="Assert that" doc:id="0e7606c1-3e03-4cd5-abfa-aad8daced8df" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="getCarDataBySpecificId-test-no-record-found" doc:id="6b6f88f1-d95b-410a-b021-595c354e0900" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock getCarById" doc:id="e3a8f1e9-df27-43a8-9c93-6be0dd220cc2" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="d7d3fa1b-9579-48cc-a673-85690c691f63" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[readUrl('classpath://getCarDataBySpecificIdtestnorecordfound\mock_payload.dwl')]" encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://getCarDataBySpecificIdtestnorecordfound\mock_attributes.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getCarDataBySpecificIdtestnorecordfound\mock_variable_.dwl')]" />
+						<munit-tools:variable key="getCarById" value="#[output application/java --- readUrl('classpath://getCarDataBySpecificIdtestnorecordfound\mock_variable_1.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="2aca5806-7a81-493f-824f-b27b48731788" >
+				<munit:payload value="#[readUrl('classpath://getCarDataBySpecificIdtestnorecordfound\set-event_payload.dwl')]" encoding="UTF-8" />
+				<munit:attributes value="#[readUrl('classpath://getCarDataBySpecificIdtestnorecordfound\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://getCarDataBySpecificIdtestnorecordfound\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to getCarDataBySpecificId" doc:id="5026249e-e803-4c9e-a4dd-a5b819258c86" name="get:\car\(CarId):car-mgmt-system-api-manish-config"/>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-that doc:name="Assert that" doc:id="8915e33a-1a8d-4c4e-b50a-7d1dd4f1e541" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="addCar-test-insert-success" doc:id="4f09b589-9f86-45ab-b535-20ad09a4d46f" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Insert Car Data" doc:id="e9c47788-7a41-4807-92c2-e65da336c383" processor="db:insert">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="e668e2e6-8c76-416a-b4a4-8a2982775c80" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://addCartestinsertsuccess\mock_payload2.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://addCartestinsertsuccess\mock_attributes2.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="selectData" value="#[output application/java --- readUrl('classpath://addCartestinsertsuccess\mock_variable_6.dwl')]" mediaType="application/java" encoding="UTF-8" />
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://addCartestinsertsuccess\mock_variable_7.dwl')]" />
+						<munit-tools:variable key="insertCarData" value="#[output application/java --- readUrl('classpath://addCartestinsertsuccess\mock_variable_8.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="1511708d-0f6a-46e1-9e84-eebe92244533" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://addCartestinsertsuccess\set-event_payload2.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://addCartestinsertsuccess\set-event_attributes2.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://addCartestinsertsuccess\set-event_variable_2.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to addCar" doc:id="4459bca1-bcbc-488f-bd19-b0949fe6d7d9" name="post:\car:application\json:car-mgmt-system-api-manish-config"/>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-that doc:name="Assert that" doc:id="59cfea23-7702-45b4-b1d2-c0295c11a48f" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="addCar-test-record-already-exist" doc:id="8ca8d742-206f-4795-ae67-8fab8f57d41b" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Select" doc:id="747c6142-d042-41ac-a50c-c3baf7f842b9" processor="db:select">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="b58b3c19-26ad-4833-b952-1c8fd379f6e7" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://addCartestrecordalreadyexist\mock_payload.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://addCartestrecordalreadyexist\mock_attributes.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="selectData" value="#[output application/java --- readUrl('classpath://addCartestrecordalreadyexist\mock_variable_.dwl')]" mediaType="application/java" encoding="UTF-8" />
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://addCartestrecordalreadyexist\mock_variable_1.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="ffb1d04c-4355-4487-8249-e40c4cfb9aac" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://addCartestrecordalreadyexist\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://addCartestrecordalreadyexist\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://addCartestrecordalreadyexist\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to addCar" doc:id="c6217572-082e-4f98-9ae9-4f0f49be25d1" name="post:\car:application\json:car-mgmt-system-api-manish-config"/>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-that doc:name="Assert that" doc:id="a73c1c56-b99e-401c-ad4f-bd65a212941a" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="getAllCarsData-test-success" doc:id="7973732e-8bb5-4a90-a776-a644b0aeba3c" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Select-all-car-data" doc:id="ebc011e2-3557-48eb-b4b9-21a2295e59de" processor="db:select">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="3e1b1c83-13f7-4436-8339-b18326e1b590" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[readUrl('classpath://getAllCarsDatatestsuccess\mock_payload1.dwl')]" encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://getAllCarsDatatestsuccess\mock_attributes1.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getAllCarsDatatestsuccess\mock_variable_2.dwl')]" />
+						<munit-tools:variable key="carData" value="#[output application/java --- readUrl('classpath://getAllCarsDatatestsuccess\mock_variable_3.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="36535208-956b-4982-b45b-89adb4b8c114" >
+				<munit:payload value="#[readUrl('classpath://getAllCarsDatatestsuccess\set-event_payload1.dwl')]" encoding="UTF-8" />
+				<munit:attributes value="#[readUrl('classpath://getAllCarsDatatestsuccess\set-event_attributes1.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://getAllCarsDatatestsuccess\set-event_variable_1.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to getAllCarsData" doc:id="68c18ea6-9d2e-4c1c-97ce-c2ef489cf90b" name="get:\car\all:car-mgmt-system-api-manish-config"/>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-that doc:name="Assert that" doc:id="dd581503-85a1-4198-88f1-935de904f3af" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="updateCar-test-success" doc:id="f5c6de0c-9fa8-44a1-941d-3dc40a3956f3" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Update" doc:id="a2185566-e22c-43e8-aebb-5c7175766f44" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="b28c4654-6828-405e-8cc7-8c04e337cac7" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://updateCartestsuccess\mock_payload.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://updateCartestsuccess\mock_attributes.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://updateCartestsuccess\mock_variable_.dwl')]" />
+						<munit-tools:variable key="existCarData" value="#[output application/java --- readUrl('classpath://updateCartestsuccess\mock_variable_1.dwl')]" mediaType="application/java" encoding="UTF-8" />
+						<munit-tools:variable key="updateCarData" value="#[output application/java --- readUrl('classpath://updateCartestsuccess\mock_variable_2.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="c674c33e-78d2-4e62-86e6-770babe22851" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://updateCartestsuccess\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://updateCartestsuccess\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://updateCartestsuccess\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to updateCar" doc:id="576152bc-ddf3-472a-aaa2-1e638a1bc039" name="put:\car\(CarId):application\json:car-mgmt-system-api-manish-config"/>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-that doc:name="Assert that" doc:id="068ebe73-6942-43e7-8676-264aefeaf686" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="updateCar-test-carId-does-not-exist" doc:id="397afa5c-a1b3-4c72-b1d9-5b7d59c35d3d" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Query single" doc:id="6f75fd1b-5f57-4081-b8a3-27598cc1f377" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="b28c4654-6828-405e-8cc7-8c04e337cac7" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://updateCartestcarIddoesnotexist\mock_payload.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://updateCartestcarIddoesnotexist\mock_attributes.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://updateCartestcarIddoesnotexist\mock_variable_.dwl')]" />
+						<munit-tools:variable key="existCarData" value="#[output application/java --- readUrl('classpath://updateCartestcarIddoesnotexist\mock_variable_1.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="465215b3-e30f-413c-982d-26067ee69935" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://updateCartestcarIddoesnotexist\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://updateCartestcarIddoesnotexist\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://updateCartestcarIddoesnotexist\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to updateCar" doc:id="069591af-c34c-4068-aa41-19ed4c3dd67a" name="put:\car\(CarId):application\json:car-mgmt-system-api-manish-config"/>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-that doc:name="Assert that" doc:id="85d234ca-7a3d-4846-bcd4-17368564d958" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="getAllCarsData-test-no-record-found" doc:id="67b2b2a1-bb82-4a04-98c3-4a09c87cc37b" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Select-all-car-data" doc:id="9cbe6773-0dca-4d34-b979-5c3c11e2d005" processor="db:select">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="3e1b1c83-13f7-4436-8339-b18326e1b590" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[readUrl('classpath://getAllCarsDatatestnorecordfound\mock_payload.dwl')]" encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://getAllCarsDatatestnorecordfound\mock_attributes.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getAllCarsDatatestnorecordfound\mock_variable_.dwl')]" />
+						<munit-tools:variable key="carData" value="#[output application/java --- readUrl('classpath://getAllCarsDatatestnorecordfound\mock_variable_1.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="52a962b3-6c55-444b-ad53-e578a6835750" >
+				<munit:payload value="#[readUrl('classpath://getAllCarsDatatestnorecordfound\set-event_payload.dwl')]" encoding="UTF-8" />
+				<munit:attributes value="#[readUrl('classpath://getAllCarsDatatestnorecordfound\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://getAllCarsDatatestnorecordfound\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to getAllCarsData" doc:id="3810e7f6-73a5-437e-a204-5e6b1a5585ef" name="get:\car\all:car-mgmt-system-api-manish-config"/>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-that doc:name="Assert that" doc:id="20357c9c-ac56-4f89-ae21-7a18d90c4ef0" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="getAllCarsData-test-success-db-connectivity" doc:id="532258ee-69f7-4d8a-9dcf-0ef8de3b87ed" expectedErrorType="DB:CONNECTIVITY">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Copy_of_Mock Select-all-car-data" doc:id="5f3a44e3-57e8-4416-99ca-0fff4f92ccee" processor="db:select" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="3e1b1c83-13f7-4436-8339-b18326e1b590" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="DB:CONNECTIVITY" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getAllCarsDatatestsuccess\mock_variable_2.dwl')]" />
+						<munit-tools:variable key="carData" value="#[output application/java --- readUrl('classpath://getAllCarsDatatestsuccess\mock_variable_3.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Copy_of_Set Input" doc:id="c94eb9a1-e540-4987-9c73-49024e5b699d" >
+				<munit:payload value="#[readUrl('classpath://getAllCarsDatatestsuccess\set-event_payload1.dwl')]" encoding="UTF-8" />
+				<munit:attributes value="#[readUrl('classpath://getAllCarsDatatestsuccess\set-event_attributes1.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://getAllCarsDatatestsuccess\set-event_variable_1.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Copy_of_Flow-ref to getAllCarsData" doc:id="1e87344d-19cd-4b9e-8dc0-9ca7a9b86fa8" name="get:\car\all:car-mgmt-system-api-manish-config" />
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:verify-call doc:name="Verify call" doc:id="ac8787ae-4f64-48f8-851a-28a3fc9f5efc" processor="ee:transform">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="43a0ec35-e91b-4ec7-934f-9b2b0c20d5ce" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="getCarDataBySpecificId-test-success-db-connectivity" doc:id="5aba8f01-f6d6-4f0f-ac6d-86f2d51016ef" expectedErrorType="DB:CONNECTIVITY">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock getCarById" doc:id="10a89dd7-af4b-4ecc-ac6c-33eeb4e5f970" processor="flow-ref" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="d7d3fa1b-9579-48cc-a673-85690c691f63" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="DB:CONNECTIVITY" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getCarDataBySpecificIdtestsuccess\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="b5887594-6c7a-496e-83cd-6fbd70857b27" >
+				<munit:payload value="#[readUrl('classpath://getCarDataBySpecificIdtestsuccess\set-event_payload.dwl')]" encoding="UTF-8" />
+				<munit:attributes value="#[readUrl('classpath://getCarDataBySpecificIdtestsuccess\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://getCarDataBySpecificIdtestsuccess\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to getCarDataBySpecificId" doc:id="9af6639e-a599-439a-aac0-943cea3678dd" name="get:\car\(CarId):car-mgmt-system-api-manish-config" />
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:verify-call doc:name="Verify call" doc:id="096403aa-15d1-48c6-84c7-2ed4a65ca681" processor="ee:transform">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="43a0ec35-e91b-4ec7-934f-9b2b0c20d5ce" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="addCar-test-insert-success-db:connectivity" doc:id="b8c00dab-538f-4f0f-940e-7a97f41ca2e1" expectedErrorType="DB:CONNECTIVITY">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Insert Car Data" doc:id="46844a72-d1b4-49bf-b5bf-990a4c32569d" processor="db:select" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="b58b3c19-26ad-4833-b952-1c8fd379f6e7" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="DB:CONNECTIVITY" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://addCartestinsertsuccess\mock_variable_7.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="19ff1646-8e02-471e-b11a-24f20a2a38be" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://addCartestinsertsuccess\set-event_payload2.dwl')]" encoding="UTF-8" />
+				<munit:attributes value="#[readUrl('classpath://addCartestinsertsuccess\set-event_attributes2.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://addCartestinsertsuccess\set-event_variable_2.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to addCar" doc:id="043ea534-5e5e-47ea-bc4c-93313b327a4b" name="post:\car:application\json:car-mgmt-system-api-manish-config" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="b498c263-63ad-4e33-b083-ddf92923c25b" processor="ee:transform" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="43a0ec35-e91b-4ec7-934f-9b2b0c20d5ce" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="updateCar-test-success-db-connetivity" doc:id="dff7598f-74ca-4a78-8b10-0ea904647645" expectedErrorType="DB:CONNECTIVITY">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Update" doc:id="1e01851b-822c-43ce-b1de-1825e004c04e" processor="flow-ref" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="b28c4654-6828-405e-8cc7-8c04e337cac7" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="DB:CONNECTIVITY" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://updateCartestsuccess\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="b0141ab1-fd36-4097-86c9-3d05ddc737d4" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://updateCartestsuccess\set-event_payload.dwl')]" encoding="UTF-8" />
+				<munit:attributes value="#[readUrl('classpath://updateCartestsuccess\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://updateCartestsuccess\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to updateCar" doc:id="dec4b1b6-8112-4f16-9ecb-ca7695c7ef68" name="put:\car\(CarId):application\json:car-mgmt-system-api-manish-config" />
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:verify-call doc:name="Verify call" doc:id="ad3a5ee9-fc5f-4157-94a7-b999a034e49f" processor="ee:transform" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="43a0ec35-e91b-4ec7-934f-9b2b0c20d5ce" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="getAllCarsData-test-success-not-found" doc:id="a386ffcf-be85-4991-9d08-522615f3dec5" expectedErrorType="APIKIT:NOT_FOUND" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Select-all-car-data" doc:id="c88f4604-9e47-48d4-b630-358503f85fd5" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_FOUND" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getAllCarsDatatestsuccess\mock_variable_2.dwl')]" />
+						<munit-tools:variable key="carData" value="#[output application/java --- readUrl('classpath://getAllCarsDatatestsuccess\mock_variable_3.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to getAllCarsData" doc:id="c58336d5-6f8b-4e44-9ebb-6a5203717744" name="car-mgmt-system-api-manish-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="56fcaa3e-2d36-42a5-a4f3-48cf755f1bfb" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="getCarDataBySpecificId-test-success-not-found" doc:id="7df35ba9-38f4-42c5-b5f8-b42501330dee" expectedErrorType="APIKIT:NOT_FOUND" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock getCarById" doc:id="dfcc353c-96e7-4059-ab39-047070cad24c" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_FOUND" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getCarDataBySpecificIdtestsuccess\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to getCarDataBySpecificId" doc:id="215881f4-94cd-4c7e-9532-c8357c971ea5" name="car-mgmt-system-api-manish-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="a2bb4071-9e63-47a4-8621-ad3f66d61696" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="addCar-test-insert-success-not-found" doc:id="3c28e852-eb30-41ec-86cf-81ddc77185d1" expectedErrorType="APIKIT:NOT_FOUND" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Insert Car Data" doc:id="a6116f43-0bf3-4212-9144-65827a87488e" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_FOUND" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://addCartestinsertsuccess\mock_variable_7.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to addCar" doc:id="2bd23ef7-c939-497c-a354-6660ce3ded3e" name="car-mgmt-system-api-manish-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="d4e136cc-9ab2-4bd2-b148-ec1d3edcc282" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="updateCar-test-success-not-found" doc:id="2169f184-97c4-4d66-9286-ce40aaa2073c" expectedErrorType="APIKIT:NOT_FOUND" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Update" doc:id="c519fd89-9f0a-4c5a-a4d4-24787f90c9de" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_FOUND" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://updateCartestsuccess\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to updateCar" doc:id="cd805ffe-5c05-4c43-b728-b597b4b336af" name="car-mgmt-system-api-manish-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="3852252f-be42-4e59-813d-51d4b73ecfaf" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="getAllCarsData-test-success-method-not-allowed" doc:id="1001133b-cc4a-4de5-a06d-4365e9fb9c34" expectedErrorType="APIKIT:METHOD_NOT_ALLOWED" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Select-all-car-data" doc:id="c6556be8-917d-4582-b8f1-3dcf398aa823" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:METHOD_NOT_ALLOWED" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getAllCarsDatatestsuccess\mock_variable_2.dwl')]" />
+						<munit-tools:variable key="carData" value="#[output application/java --- readUrl('classpath://getAllCarsDatatestsuccess\mock_variable_3.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to getAllCarsData" doc:id="7b57d37a-a02a-4f6c-b2a6-b478d2706edb" name="car-mgmt-system-api-manish-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="40f61ded-4355-417c-998f-9eca96ef91c9" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="getAllCarsData-test-success-bad-request" doc:id="5fe8b250-3199-40fe-86a6-7d207663f009" expectedErrorType="APIKIT:BAD_REQUEST" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Select-all-car-data" doc:id="860b2f46-ef66-400b-a442-f55835a17123" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:BAD_REQUEST" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getAllCarsDatatestsuccess\mock_variable_2.dwl')]" />
+						<munit-tools:variable key="carData" value="#[output application/java --- readUrl('classpath://getAllCarsDatatestsuccess\mock_variable_3.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to getAllCarsData" doc:id="b8b598f8-5568-44db-9068-171138a2395c" name="car-mgmt-system-api-manish-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="4349d103-0a06-45b6-919c-4c48ee1ab883" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="getAllCarsData-test-success-not-acceptable" doc:id="37a6463c-ba64-460d-bb10-6a8ad3335722" expectedErrorType="APIKIT:NOT_ACCEPTABLE" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Select-all-car-data" doc:id="9147a57f-82f6-41e1-be56-21c3fc24e718" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_ACCEPTABLE" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getAllCarsDatatestsuccess\mock_variable_2.dwl')]" />
+						<munit-tools:variable key="carData" value="#[output application/java --- readUrl('classpath://getAllCarsDatatestsuccess\mock_variable_3.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to getAllCarsData" doc:id="9681b81e-6490-4147-b790-a60d5a6dddcf" name="car-mgmt-system-api-manish-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="fd5a0410-709a-437f-85c1-648cde61effe" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="getAllCarsData-test-success-unsupported-media-type" doc:id="89a9525a-0c54-4ff9-a679-9840e950e103" expectedErrorType="APIKIT:UNSUPPORTED_MEDIA_TYPE" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Select-all-car-data" doc:id="3c94e747-29a7-4033-8227-7b9e115b7ba4" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:UNSUPPORTED_MEDIA_TYPE" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getAllCarsDatatestsuccess\mock_variable_2.dwl')]" />
+						<munit-tools:variable key="carData" value="#[output application/java --- readUrl('classpath://getAllCarsDatatestsuccess\mock_variable_3.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to getAllCarsData" doc:id="a2602ef5-dec8-4b51-a65f-b5da9fb1f48d" name="car-mgmt-system-api-manish-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="85808106-9bf5-40a4-8df1-1ba135aeb36e" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="getAllCarsData-test-success-not-implemented" doc:id="a2411f4e-971b-42b0-ae8f-8342f55b465a" expectedErrorType="APIKIT:NOT_IMPLEMENTED" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Select-all-car-data" doc:id="cb0fc833-ddb1-45e1-b42b-7940f0803021" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_IMPLEMENTED" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getAllCarsDatatestsuccess\mock_variable_2.dwl')]" />
+						<munit-tools:variable key="carData" value="#[output application/java --- readUrl('classpath://getAllCarsDatatestsuccess\mock_variable_3.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to getAllCarsData" doc:id="d1503ed3-7489-4107-b503-ce56cee427b4" name="car-mgmt-system-api-manish-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="0d665843-4da4-4ca1-bcdf-a5f3647f00e4" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="getCarDataBySpecificId-test-method-not-allowed" doc:id="a75b694a-7732-4cbf-841a-9bd53cb70139" expectedErrorType="APIKIT:METHOD_NOT_ALLOWED" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock getCarById" doc:id="dacd0c0b-fe0d-443e-a524-f59411bdefc5" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:METHOD_NOT_ALLOWED" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getCarDataBySpecificIdtestsuccess\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to getCarDataBySpecificId" doc:id="5667851e-1162-4b4a-a53d-297f0eda91ac" name="car-mgmt-system-api-manish-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="0bdcb147-4a35-4605-9526-f85f9235f25f" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="getCarDataBySpecificId-test-not-acceptable" doc:id="3c09d773-2658-413a-a80c-0e5a6abae69f" expectedErrorType="APIKIT:NOT_ACCEPTABLE" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock getCarById" doc:id="348fbd83-f991-4bd9-907d-d12582e52169" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_ACCEPTABLE" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getCarDataBySpecificIdtestsuccess\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to getCarDataBySpecificId" doc:id="0b1765d1-1fd6-4a74-8985-90ed2141b4c6" name="car-mgmt-system-api-manish-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="97969538-9793-480f-ae9f-909bc179f88f" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="getCarDataBySpecificId-test-unsupported-media-type" doc:id="e9abb557-d479-400e-ba86-b8e96468bedf" expectedErrorType="APIKIT:UNSUPPORTED_MEDIA_TYPE" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock getCarById" doc:id="4417e87c-aa7e-4ea7-93ba-4a2a64bf7618" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:UNSUPPORTED_MEDIA_TYPE" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getCarDataBySpecificIdtestsuccess\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to getCarDataBySpecificId" doc:id="b138c542-4d5a-4f47-976d-cba684fef12c" name="car-mgmt-system-api-manish-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="3b7d66db-389a-4831-b938-0a34c14eb70f" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="getCarDataBySpecificId-test-not-implemented" doc:id="ca85ce0c-d3c0-4ae9-9d4b-4ebacf30d6b3" expectedErrorType="APIKIT:NOT_IMPLEMENTED" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock getCarById" doc:id="919c0fd0-db64-4df3-9857-58255b921483" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_IMPLEMENTED" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getCarDataBySpecificIdtestsuccess\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to getCarDataBySpecificId" doc:id="d9ce9d52-9543-44fb-b452-dac734c256c0" name="car-mgmt-system-api-manish-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="3a6a3ff7-2efc-4896-aa87-7ced38f79a52" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="addCar-test-insert-method-not-allowed" doc:id="5d3f341c-5a65-46d3-8663-432a0e6665ff" expectedErrorType="APIKIT:METHOD_NOT_ALLOWED" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Insert Car Data" doc:id="1111d78f-586a-48ec-8a1e-9539db6a17b9" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:METHOD_NOT_ALLOWED" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://addCartestinsertsuccess\mock_variable_7.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to addCar" doc:id="8b153f57-47c2-4451-9b66-1c7646e16246" name="car-mgmt-system-api-manish-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="cf838e7f-a7b7-4a85-a82c-b31a65e5f1a6" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="addCar-test-insert-not-acceptable" doc:id="86ff58eb-ed9d-4f46-8830-ebd628ffd9e1" expectedErrorType="APIKIT:NOT_ACCEPTABLE" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Insert Car Data" doc:id="f2cd534f-9893-4a90-8237-01028426660e" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_ACCEPTABLE" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://addCartestinsertsuccess\mock_variable_7.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to addCar" doc:id="d80ba621-a9f8-4315-a6a5-3ff734517ef4" name="car-mgmt-system-api-manish-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="bdce36e1-f36a-48c7-9eb8-df2c1e4e7c42" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="addCar-test-insert-unsupported-media-type" doc:id="44cdae7c-139c-4518-870a-3613437e0226" expectedErrorType="APIKIT:UNSUPPORTED_MEDIA_TYPE" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Insert Car Data" doc:id="83cf78bd-c808-4191-8495-2d9f754e913a" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:UNSUPPORTED_MEDIA_TYPE" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://addCartestinsertsuccess\mock_variable_7.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to addCar" doc:id="9e64206c-b91b-4c61-9f48-01304c1b8ec7" name="car-mgmt-system-api-manish-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="b2cb754a-96b0-4b22-822b-de3a3281d041" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="addCar-test-insert-not-implemented" doc:id="dc604a81-5339-4f96-afa3-7a5e1297ebb1" expectedErrorType="APIKIT:NOT_IMPLEMENTED" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Insert Car Data" doc:id="5ffce838-1fc2-4df4-a7e2-c12638bed3d5" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_IMPLEMENTED" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://addCartestinsertsuccess\mock_variable_7.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to addCar" doc:id="bd64ca31-b684-476d-94da-a3489f6cefbc" name="car-mgmt-system-api-manish-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="5ab3dcf1-b7a2-4c47-b2af-776ef41c4b21" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="addCar-test-insert-bad-request" doc:id="6cff3a86-de09-418f-a37a-fbefb18bdf5e" expectedErrorType="APIKIT:BAD_REQUEST" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Insert Car Data" doc:id="f2859bcf-2076-4bb7-9ee2-b310a17d15f4" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:BAD_REQUEST" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://addCartestinsertsuccess\mock_variable_7.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to addCar" doc:id="ff7a4a9b-dd33-4768-b081-32f82e2c3d93" name="car-mgmt-system-api-manish-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="6a1d2a30-ae02-4797-aebe-1543e2f22a27" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="getCarDataBySpecificId-test-bad-request" doc:id="044f2167-1e13-4346-a0cf-a606f4b60109" expectedErrorType="APIKIT:BAD_REQUEST" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock getCarById" doc:id="9a3a6a5a-4688-4e02-b9ec-d61d8df0e184" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:BAD_REQUEST" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getCarDataBySpecificIdtestsuccess\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to getCarDataBySpecificId" doc:id="e27cd17d-26df-406b-9ce6-4dbaaeb8e36a" name="car-mgmt-system-api-manish-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="61342094-088a-41f3-9aac-cb09f04e457b" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="updateCar-test-success-bad-request" doc:id="2c699b80-1be9-4baa-ae23-be6943d5c314" expectedErrorType="APIKIT:BAD_REQUEST" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Update" doc:id="56566466-9d72-4da1-8598-9dbc73b58efd" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:BAD_REQUEST" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://updateCartestsuccess\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to updateCar" doc:id="f9a4486e-7afa-4e89-bb91-a2b27e9dcaf2" name="car-mgmt-system-api-manish-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="bc6c8f48-bd19-4148-b8e3-73c98207b224" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="updateCar-test-success-method-not-acceptable" doc:id="853aaa71-5f5c-42df-ad9a-5432ccfe78d0" expectedErrorType="HTTP:NOT_ACCEPTABLE" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Update" doc:id="bffa7f58-eb95-40f5-a495-207ebd3f0995" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="HTTP:NOT_ACCEPTABLE" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://updateCartestsuccess\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to updateCar" doc:id="732a76da-4f23-4f1c-b7d3-a71013b772dd" name="car-mgmt-system-api-manish-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="089b7919-9dc7-48d8-a753-7fc1a701db79" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="updateCar-test-success-method-not-allowed" doc:id="81f9ddd1-a6b2-4f2c-a691-5898254f2191" expectedErrorType="APIKIT:METHOD_NOT_ALLOWED" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Update" doc:id="95995f4f-956a-4308-b885-4afa028e0e52" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:METHOD_NOT_ALLOWED" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://updateCartestsuccess\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to updateCar" doc:id="85e63716-6885-47d8-a621-93bfbd97d720" name="car-mgmt-system-api-manish-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="d2e00746-18eb-4495-8b27-f9cf486948cc" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="updateCar-test-success-unsupported-media-type" doc:id="14460f9f-81b2-4c76-80c6-eb1875a0e3c4" expectedErrorType="APIKIT:UNSUPPORTED_MEDIA_TYPE" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Update" doc:id="2cd29fd8-adec-4693-bd73-328fe22b1e8f" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:UNSUPPORTED_MEDIA_TYPE" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://updateCartestsuccess\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to updateCar" doc:id="a5309493-f2be-443c-acbc-d2905a1a0ff1" name="car-mgmt-system-api-manish-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="b0ec2e8b-5784-4902-a965-dbdf24d1dcbd" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="updateCar-test-success-not-implemented" doc:id="8faed03c-8db9-4da6-aaa2-ea6040bb6825" expectedErrorType="APIKIT:NOT_IMPLEMENTED" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Update" doc:id="d4cd1069-a9c1-4aae-80e6-11f3d1e7a8f0" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_IMPLEMENTED" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://updateCartestsuccess\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to updateCar" doc:id="e8777e21-2418-4acf-b8cd-9fba56301507" name="car-mgmt-system-api-manish-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="a91c05ab-88f3-42c0-8ffc-6ba1bb2c3687" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="updateCar-test-success-not-found-console" doc:id="bf5568cc-9804-48d4-af2f-2dfbc02db98d" expectedErrorType="APIKIT:NOT_FOUND" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Update" doc:id="ffffddd9-17db-43f4-9e6d-055f30996177" processor="apikit:console" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_FOUND" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://updateCartestsuccess\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to updateCar" doc:id="ba08ef92-69fa-40a6-90d5-df20a93c5f6e" name="car-mgmt-system-api-manish-console" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="b8a56bd6-3220-4d2d-b500-f12f62ca3932" processor="apikit:console" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="getCarDataBySpecificId-test-not-found-console" doc:id="b035865e-0c2b-4f04-aea3-fccbd631f716" expectedErrorType="APIKIT:NOT_FOUND" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock getCarById" doc:id="ca59ceb6-893f-4333-9675-5b5d2461e3ac" processor="apikit:console" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_FOUND" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getCarDataBySpecificIdtestsuccess\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to getCarDataBySpecificId" doc:id="dde07cd2-ed5a-4fb0-825c-7b020d3fc87a" name="car-mgmt-system-api-manish-console" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="ea001148-d114-4b16-a8d7-004da841c8fa" processor="apikit:console" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="addCar-test-insert-not-found-console" doc:id="4844a5b0-1969-49ec-8385-f29a13928cd5" expectedErrorType="APIKIT:NOT_FOUND" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Insert Car Data" doc:id="04dff14a-aa43-449e-8b50-28798a2965bb" processor="apikit:console" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_FOUND" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://addCartestinsertsuccess\mock_variable_7.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to addCar" doc:id="6c9e427a-6a1c-465b-9ee9-a50abe0be090" name="car-mgmt-system-api-manish-console" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Copy_of_Verify call" doc:id="13c73334-14d3-4034-a8f5-21b0269c59ff" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="getAllCarsData-test-success-not-found-console" doc:id="35528c4e-394b-4e2b-a1c9-83f724d42ae0" expectedErrorType="APIKIT:NOT_FOUND" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Select-all-car-data" doc:id="126f40dc-4f4d-4f07-979d-037d5835ab07" processor="apikit:console" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_FOUND" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getAllCarsDatatestsuccess\mock_variable_2.dwl')]" />
+						<munit-tools:variable key="carData" value="#[output application/java --- readUrl('classpath://getAllCarsDatatestsuccess\mock_variable_3.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to getAllCarsData" doc:id="76bd0cdb-71d4-4a9f-9217-b83808f3b259" name="car-mgmt-system-api-manish-console" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="5a9c8b5c-39d2-40b4-8abb-f8cb730c0a9b" processor="apikit:console" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="car-mgmt-system-api-manish-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
